@@ -9,7 +9,7 @@ $connection = new mysqli($servername, $username, $password, $dbname);
 if ($connection->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
-  echo "Connected successfully";
+  echo "Connected successfully <br>";
 
 ?>
 
@@ -27,6 +27,17 @@ if ($connection->connect_error) {
     if (isset($_GET["category_name"])) {
         $category_name = $_GET["category_name"];
         $category_entryDate = $_GET["category_entry_date"];
+
+        // VALUES should be inside single quote not double quotes
+        $sql = "INSERT INTO category (category_name, category_entry_date) VALUES ('$category_name','$category_entryDate')";
+
+        if($connection-> query($sql) === TRUE){
+            echo "Data inserted successfully";
+        } else {
+            echo "failed to insert data !!!";
+        }
+
+
     }
     ?>
 
